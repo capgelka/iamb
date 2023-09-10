@@ -202,6 +202,7 @@ pub enum RoomAction {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum SendAction {
     Submit,
+    SubmitFromEditor,
     Upload(String),
     UploadImage(usize, usize, Cow<'static, [u8]>),
 }
