@@ -442,7 +442,9 @@ impl ChatState {
                         }
                     },
                     _ => {
-                        Some(external_edit(msg.trim_end().to_string())?)
+                        tokio::task::spawn_blocking(move || {
+                            external_edit(msg.trim_end().to_string())
+                        }).await.map_or_else(|_| None, |x| x.ok())
                     },
                 }) else {
                     return Ok(None);
